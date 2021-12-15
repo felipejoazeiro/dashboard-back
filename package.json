@@ -40,7 +40,6 @@
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
     "request": "^2.88.0",
-    "xml2js": "^0.4.23",
     "xml2json-light": "^1.0.6"
   },
   "devDependencies": {}
