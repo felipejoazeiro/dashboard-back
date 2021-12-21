@@ -55,7 +55,7 @@ class ProdutoController{
 
     //PUT /:id
     async update(req,res,next){
-        const {titulo, disponibilidade, descricao, categoria , preco, promocao, sku} = req.body
+        const {titulo, disponibilidade, fotos, descricao, categoria , preco, promocao, sku} = req.body
         const {loja} = req.query
 
         try{
@@ -64,6 +64,7 @@ class ProdutoController{
             if(titulo) produto.titulo = titulo
             if(descricao) produto.descricao = descricao
             if(disponibilidade !== undefined) produto.disponibilidade = disponibilidade
+            if(fotos) produto.fotos = fotos
             if(preco) produto.preco = preco
             if(promocao) produto.promocao = promocao
             if(sku) produto.sku = sku
@@ -73,7 +74,7 @@ class ProdutoController{
                 const newCategoria = await Categoria.findById(categoria)
 
                 if(oldCategoria && newCategoria){
-                    oldCategoria.produtos = oldCategoria.produtos.filter(item=> item !== produto._id)
+                    oldCategoria.produtos = oldCategoria.produtos.filter(item=> item.toString() !== produto._id)
                     newCategoria.produtos.push(produto._id)
                     produto.categoria = categoria
                     await oldCategoria.save()
